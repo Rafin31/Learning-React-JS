@@ -1,24 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react';
+import UserList from './components/UserList';
+import Navbar from './components/Navbar';
+import AddUser from './components/AddUser';
+import { users } from './usersData';
+
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 function App() {
+
+  const [myuser, setUsers] = useState(users);
+
+  const deleteCallback = (id) => {
+    const data = myuser.filter((user) => user.id !== id);
+    setUsers(data);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+
+    <Router>
+      <Navbar />
+      <Switch>
+        <Route exact path='/'>
+          <h2>Welcome Home</h2>
+        </Route>
+        <Route path='/userlist'>
+          <div >
+            <UserList list={myuser} callback={deleteCallback} />
+          </div>
+        </Route>
+        <Route path='/Create'>
+          <AddUser />
+        </Route>
+        <Route path='/edit/:id' ><h1></h1></Route>
+        <Route path='*'>
+          <h3>404 not found</h3>
+        </Route>
+      </Switch>
+    </Router >
   );
 }
 
