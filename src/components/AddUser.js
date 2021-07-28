@@ -6,17 +6,17 @@ import { getElementById } from 'domutils';
 import React, { useState } from 'react';
 
 
-const AddUser = ({ status }) => {
+const AddUser = ({ status, adduser }) => {
 
-    const submited = () => {
-        console.log("submitted");
-    }
+
 
     var [user, setuser] = useState({
         user_id: '',
         name: '',
         dept: '',
     });
+    //console.log(user);
+
 
     const inputEvent = (event) => {
         // console.log(event.target.value);
@@ -26,28 +26,35 @@ const AddUser = ({ status }) => {
         const name = event.target.name;
 
         setuser((prev) => {
-            //console.log(prev);
-            if (name == 'user_id') {
-                return {
-                    user_id: value,
-                    dept: prev.dept,
-                    name: prev.name,
-                };
 
-            } else if (name == "name") {
-                return {
-                    id: prev.id,
-                    dept: prev.dept,
-                    name: value,
-                };
-            } else if (name == "dept") {
-                return {
-                    id: prev.id,
-                    dept: value,
-                    name: prev.name,
-                };
+
+            return {
+                ...prev,
+                [name]: value,
             }
+            //console.log(prev);
+            // if (name == 'user_id') {
+            //     return {
+            //         user_id: value,
+            //         dept: prev.dept,
+            //         name: prev.name,
+            //     };
+
+            // } else if (name == "name") {
+            //     return {
+            //         id: prev.id,
+            //         dept: prev.dept,
+            //         name: value,
+            //     };
+            // } else if (name == "dept") {
+            //     return {
+            //         id: prev.id,
+            //         dept: value,
+            //         name: prev.name,
+            //     };
+            // }
         })
+        adduser(user);
 
     };
 
@@ -71,7 +78,7 @@ const AddUser = ({ status }) => {
                     </tr>
                     <tr>
                         <td></td>
-                        <td><input type="submit" onClick={submited} value="Add user" /></td>
+                        <td><input type="button" onClick={() => { adduser(user) }} value="Add user" /></td>
                     </tr>
                 </table>
             </form>

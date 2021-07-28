@@ -15,6 +15,14 @@ function App() {
     setUsers(data);
   }
 
+  const adduser = (addedUser) => {
+
+    const totaluser = [...users, ...addedUser];
+
+    setUsers(totaluser);
+
+  }
+
   return (
 
     <Router>
@@ -29,7 +37,7 @@ function App() {
           </div>
         </Route>
         <Route path='/Create'>
-          <AddUser />
+          <AddUser adduser={adduser} />
         </Route>
         <Route path='/edit/:id' ><h1></h1></Route>
         <Route path='*'>
