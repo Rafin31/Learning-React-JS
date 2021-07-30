@@ -6,21 +6,34 @@ import { getElementById } from 'domutils';
 import React, { useState } from 'react';
 
 
-const AddUser = ({ status, adduser }) => {
+const Edituser = ({ status, callback, deleteCallback }) => {
+    const id = useParams();
 
     const onSubmit = (e) => {
         e.preventDefault();
-        adduser(user);
+        //deleteCallback(id.id);
+        callback(users);
     }
 
-
-
     var [user, setuser] = useState({
-        id: '',
+        id: id.id,
         name: '',
         dept: '',
     });
-    //console.log(user.user_id);
+
+
+    //console.log(users[0].id);
+    for (let index = 0; index < users.length; index++) {
+
+        if (users[index].id == id.id) {
+            var editeduser = users[index];
+            users[index].name = user.name;
+            users[index].name = user.name;
+            //console.log(users);
+        }
+    }
+
+
 
 
     const inputEvent = (event) => {
@@ -64,14 +77,14 @@ const AddUser = ({ status, adduser }) => {
 
     return (
 
-        <div className='adduser'>
+        <div className='edituser'>
 
             <form onSubmit={onSubmit} >
                 <table>
 
                     <tr>
                         <td>User id :</td>
-                        <td><input type="number" name="id" placeholder="enter your id" onChange={inputEvent} /></td>
+                        <td><input type="number" name="id" placeholder="enter your id" placeholder={editeduser.id} /></td>
                     </tr>
                     <tr>
                         <td>User Name :</td>
@@ -83,7 +96,7 @@ const AddUser = ({ status, adduser }) => {
                     </tr>
                     <tr>
                         <td></td>
-                        <td><input type="submit" name="submit" value="Add user" /></td>
+                        <td><input type="submit" name="submit" value="Edit" /></td>
                     </tr>
                 </table>
             </form>
@@ -98,4 +111,4 @@ const AddUser = ({ status, adduser }) => {
     );
 
 }
-export default AddUser;
+export default Edituser;
