@@ -84,7 +84,7 @@ const Edituser = ({ status, callback, deleteCallback }) => {
 
                     <tr>
                         <td>User id :</td>
-                        <td><input type="number" name="id" placeholder="enter your id" placeholder={editeduser.id} /></td>
+                        <td><input type="number" name="id" placeholder="enter your id" /></td>
                     </tr>
                     <tr>
                         <td>User Name :</td>
