@@ -8,17 +8,28 @@ import React, { useState } from 'react';
 
 const AddUser = ({ status, adduser }) => {
 
-    const onSubmit = (e) => {
+    const onSubmit = async (e) => {
         e.preventDefault();
-        adduser(user);
+
+        let result = await fetch("http://127.0.0.1:8000/api/userList", {
+            method: 'POST',
+            body: JSON.stringify(user),
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            }
+        })
+        console.warn(result);
     }
 
 
 
     var [user, setuser] = useState({
-        id: '',
-        name: '',
-        dept: '',
+        user_name: '',
+        email: '',
+        address: '',
+        phone_number: '',
+        user_type: '',
     });
     //console.log(user.user_id);
 
@@ -70,16 +81,24 @@ const AddUser = ({ status, adduser }) => {
                 <table>
 
                     <tr>
-                        <td>User id :</td>
-                        <td><input type="number" name="id" placeholder="enter your id" onChange={inputEvent} /></td>
-                    </tr>
-                    <tr>
                         <td>User Name :</td>
-                        <td><input type="text" name="name" onChange={inputEvent} /></td>
+                        <td><input type="text" name="user_name" placeholder="enter your User name" onChange={inputEvent} /></td>
                     </tr>
                     <tr>
-                        <td>User Dept :</td>
-                        <td><input type="text" name="dept" onChange={inputEvent} /></td>
+                        <td>User email :</td>
+                        <td><input type="text" name="email" onChange={inputEvent} /></td>
+                    </tr>
+                    <tr>
+                        <td>User address :</td>
+                        <td><input type="text" name="address" onChange={inputEvent} /></td>
+                    </tr>
+                    <tr>
+                        <td>User number :</td>
+                        <td><input type="text" name="phone_number" onChange={inputEvent} /></td>
+                    </tr>
+                    <tr>
+                        <td>User type :</td>
+                        <td><input type="text" name="user_type" onChange={inputEvent} /></td>
                     </tr>
                     <tr>
                         <td></td>

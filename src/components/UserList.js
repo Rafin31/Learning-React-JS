@@ -1,7 +1,7 @@
 import User from './User';
 
 const UserList = ({ list, callback }) => {
-    console.log(list);
+    //console.log(list);
 
     return (
         <div>

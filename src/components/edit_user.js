@@ -27,6 +27,7 @@ const Edituser = ({ status, callback, deleteCallback }) => {
 
         if (users[index].id == id.id) {
             var editeduser = users[index];
+            users[index].id = id.id;
             users[index].name = user.name;
             users[index].name = user.name;
             //console.log(users);
